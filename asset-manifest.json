@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/BaiKtra/static/css/main.caac9915.css",
-    "main.js": "/BaiKtra/static/js/main.42b17fa8.js",
+    "main.js": "/BaiKtra/static/js/main.a4f542e2.js",
     "static/js/453.840bc3ac.chunk.js": "/BaiKtra/static/js/453.840bc3ac.chunk.js",
     "static/media/logo.png": "/BaiKtra/static/media/logo.ed55f45faa63a23b5b63.png",
     "index.html": "/BaiKtra/index.html",
     "main.caac9915.css.map": "/BaiKtra/static/css/main.caac9915.css.map",
-    "main.42b17fa8.js.map": "/BaiKtra/static/js/main.42b17fa8.js.map",
+    "main.a4f542e2.js.map": "/BaiKtra/static/js/main.a4f542e2.js.map",
     "453.840bc3ac.chunk.js.map": "/BaiKtra/static/js/453.840bc3ac.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.caac9915.css",
-    "static/js/main.42b17fa8.js"
+    "static/js/main.a4f542e2.js"
   ]
 }
