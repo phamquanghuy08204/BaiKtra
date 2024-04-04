@@ -22,9 +22,9 @@ connection.connect((err) => {
 });
 
 app.post('/AddInfo', (req, res) => {
-  const { id, hoTen,gioiTinh, ngaySinh,noiSinh,dantoc,tonGiao,hoKhau,noiTotNghiep,namTotNghiep,cmnd,ngayCap,noiCap,diaChiNhanh,dienthoai,dienThoaiPhuHuynh,nganhDangKy } = req.body; 
-  const sql = 'INSERT INTO kt2903 (`id`, `hoTen`, `gioiTinh`, `ngaySinh`,`noiSinh`,`dantoc`,`tonGiao`,`hoKhau`,`noiTotNghiep`,`namTotNghiep`,`cmnd`,`ngayCap`,`noiCap`,`diaChiNhanh`,`dienthoai`,`dienThoaiPhuHuynh`,`nganhDangKy`) VALUES (?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-  connection.query(sql, [id,hoTen,gioiTinh,ngaySinh,noiSinh,dantoc,tonGiao,hoKhau,noiTotNghiep,namTotNghiep,cmnd,ngayCap,noiCap,diaChiNhanh,dienthoai,dienThoaiPhuHuynh,nganhDangKy], (error, results, fields) => {
+  const { id, hoTen,gioiTinh, ngaySinh,noiSinh,dantoc,tonGiao,hoKhau,noiTotNghiep,namTotNghiep,cmnd,ngayCap,noiCap,diaChiNhanh,dienThoai,dienThoaiPhuHuynh,nganhDangKy } = req.body; 
+  const sql = 'INSERT INTO kt2903 (`id`, `hoTen`, `gioiTinh`, `ngaySinh`,`noiSinh`,`dantoc`,`tonGiao`,`hoKhau`,`noiTotNghiep`,`namTotNghiep`,`cmnd`,`ngayCap`,`noiCap`,`diaChiNhanh`,`dienThoai`,`dienThoaiPhuHuynh`,`nganhDangKy`) VALUES (?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+  connection.query(sql, [id,hoTen,gioiTinh,ngaySinh,noiSinh,dantoc,tonGiao,hoKhau,noiTotNghiep,namTotNghiep,cmnd,ngayCap,noiCap,diaChiNhanh,dienThoai,dienThoaiPhuHuynh,nganhDangKy], (error, results, fields) => {
     if (error) {
      
       console.error('Error adding info:', error);

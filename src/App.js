@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
-import img from './logo.png'
+import img from './logo.png';
+import axios from 'axios';
+
 
 function App() {
   const [formData, setFormData] = useState({
@@ -9,7 +11,7 @@ function App() {
     gioiTinh: '',
     ngaySinh: '',
     noiSinh: '',
-    danToc: '',
+    dantoc: '',
     tonGiao: '',
     hoKhau: '',
     noiTotNghiep: '',
@@ -20,32 +22,29 @@ function App() {
     diaChiNhanh: '',
     dienThoai: '',
     dienThoaiPhuHuynh: '',
+    id:'',
   });
 
   const handleChange = (e) => {
-  const { name, value, checked } = e.target;
-  const newNganhDangKy = [...formData.nganhDangKy];
-
-  if (checked) {
-    newNganhDangKy.push(name);
-  } else {
-    const index = newNganhDangKy.indexOf(name);
-    newNganhDangKy.splice(index, 1);
-  }
+    const { name, value } = e.target;
   setFormData({
-    ...formData,
-    [name]: value,
-    nganhDangKy: newNganhDangKy 
+      ...formData,
+      [name]: value
   });
 
   
 
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
 
     e.preventDefault();
-    console.log(formData);
+    try {
+      const response = await axios.post('http://localhost:3001/AddInfo', formData);
+      console.log(response.data);
+  } catch (error) {
+      console.error(error);
+  }
   };
 
   return (
@@ -76,6 +75,17 @@ function App() {
         <form onSubmit={handleSubmit}>
           <section className="thong-tin-ca-nhan">
             <h2>THÔNG TIN CÁ NHÂN</h2>
+            <div className="form-group-left">
+              <label className="red-text" htmlFor="hoTen">Số :</label>
+              <input
+                type="text"
+                name="id"
+                id="id"
+                value={formData.id}
+                onChange={handleChange}
+                required
+              />
+            </div>
             <div className="form-group-left">
               <label className="red-text" htmlFor="hoTen">Họ và tên:</label>
               <input
@@ -124,12 +134,12 @@ function App() {
               />
             </div>
             <div className="form-group-left">
-              <label className="red-text" htmlFor="danToc">Dân tộc:</label>
+              <label className="red-text" htmlFor="dantoc">Dân tộc:</label>
               <input
                 type="text"
-                name="danToc"
-                id="danToc"
-                value={formData.danToc}
+                name="dantoc"
+                id="dantoc"
+                value={formData.dantoc}
                 onChange={handleChange}
                 required
 />
@@ -245,93 +255,78 @@ name="diaChiNhanh"
           </section>
           <section>
           <div className="form-dang-ky">
-      <h1 style={{backgroundColor:"red",color:"white"}} >NGÀNH ĐĂNG KÝ XÉT TUYỂN</h1>
-      <form onSubmit={handleSubmit}>
-        {nganhHocList.map((nganh) => (
-          <div className="form-group" key={nganh.maNganh}>
-           <label style={{ color: "red" }} htmlFor={nganh.maNganh}>
-  {nganh.tenNganh}
-</label>
-            <input
-              type="checkbox"
-              name={nganh.maNganh}
-              id={nganh.maNganh}
-              onChange={handleChange}
-            />
-          </div>
-        ))}
-      </form>
+          <h1 style={{color:"red"}} >NGÀNH ĐĂNG KÝ XÉT TUYỂN</h1>
+              <ul className='red-text'>
+            <li>
+              <input type="radio" id="nganhDangKy" name="nganhDangKy" value="Digital Marketing" onChange={handleChange} checked={formData.nganhDangKy === "Digital Marketing"} />
+              Digital Marketing{" "}
+            </li>
+            <li>
+              <input type="radio" name="nganhDangKy" value="Quản trị khách sạn" onChange={handleChange} checked={formData.nganhDangKy === "Quản trị khách sạn"} />
+              Quản trị khách sạn{" "}
+            </li>
+            <li>
+              <input type="radio" name="nganhDangKy" value="Phiên dịch tiếng Anh thương mại" onChange={handleChange} checked={formData.nganhDangKy === "Phiên dịch tiếng Anh thương mại"} />
+              Phiên dịch tiếng Anh thương mại{" "}
+            </li>
+            <li>
+              <input type="radio" name="nganhDangKy" value="CNTT-Ứng dụng phần mềm" onChange={handleChange} checked={formData.nganhDangKy === "CNTT-Ứng dụng phần mềm"} />
+              CNTT-Ứng dụng phần mềm{" "}
+            </li>
+            <li>
+              <input type="radio" name="nganhDangKy" value="Tiếng Hàn" onChange={handleChange} checked={formData.nganhDangKy === "Tiếng Hàn"} />
+              Tiếng Hàn{" "}
+            </li>
+            <li>
+              <input type="radio" name="nganhDangKy" value="Chăm sóc sắc đẹp" onChange={handleChange} checked={formData.nganhDangKy === "Chăm sóc sắc đẹp"} />
+              Chăm sóc sắc đẹp{" "}
+            </li>
+            <li>
+              <input type="radio" name="nganhDangKy" value="Tài chính đầu tư" onChange={handleChange} checked={formData.nganhDangKy === "Tài chính đầu tư"}/>
+              Tài chính đầu tư{" "}
+            </li>
+            <li>
+              <input type="radio" name="nganhDangKy" value="Công nghệ ô tô" onChange={handleChange} checked={formData.nganhDangKy === "Công nghệ ô tô"}/>
+              Công nghệ ô tô{" "}
+            </li>
+            <li>
+              <input type="radio" name="nganhDangKy" value="Thiết kế đồ họa" onChange={handleChange} checked={formData.nganhDangKy === "Thiết kế đồ họa"}/>
+              Thiết kế đồ họa{" "}
+            </li>
+            <li>
+              <input type="radio" name="nganhDangKy" value="Quản trị bán hàng" onChange={handleChange} checked={formData.nganhDangKy === "Quản trị bán hàng"}/>
+              Quản trị bán hàng{" "}
+            </li>
+            <li>
+              <input type="radio" name="nganhDangKy" value="Quản trị doanh nghiệp" onChange={handleChange}checked={formData.nganhDangKy === "Quản trị doanh nghiệp"} />
+              Quản trị doanh nghiệp{" "}
+            </li>
+            <li>
+<input type="radio" name="nganhDangKy" value="Quản lý công nghiệp" onChange={handleChange} checked={formData.nganhDangKy === "Quản lý công nghiệp"}/>
+              Quản lý công nghiệp{" "}
+            </li>
+            <li>
+              <input type="radio" name="nganhDangKy" value="Tiếng Nhật" onChange={handleChange} checked={formData.nganhDangKy === "Tiếng Nhật"}/>
+              Tiếng Nhật{" "}
+            </li>
+            <li>
+              <input type="radio" name="nganhDangKy" value="logistics" onChange={handleChange} checked={formData.nganhDangKy === "logistics"}/>
+              logistics{" "}
+            </li>
+            <li>
+              <input type="radio" name="nganhDangKy" value="Tiếng Trung" onChange={handleChange} checked={formData.nganhDangKy === "Tiếng Trung"}/>
+              Tiếng Trung{" "}
+            </li>
+            </ul>
     </div>
-    <p style={{color:'red',textAlign:'center'}}><i style={{fontSize:"12px"}}>Tôi cam đoan những lời khai trong phiếu DKXT này là đúng sự thật, nếu sai tôi chấp nhận chịu xử lý theo Quy chế tuyển sinh.</i></p>
+    <p style={{color:'red',textAlign:'center'}}><i>Tôi cam đoan những lời khai trong phiếu DKXT này là đúng sự thật, nếu sai tôi chấp nhận chịu xử lý theo Quy chế tuyển sinh</i></p>
           </section>
-          <div style={{textAlign:"center"}}><button type="submit"><b>ĐĂNG KÝ</b></button></div>
+         <div style={{textAlign:"center"}}> <button type="submit" style={{textAlign:'center'}}><b>ĐĂNG KÝ</b></button></div>
         </form>
       </main>
     </div>
   );
 }
-
+    
 export default App;
 
-const nganhHocList = [
-  {
-    maNganh: "digital-marketing",
-    tenNganh: "Digital Marketing",
-  },
-  {
-    maNganh: "thiet-ke-do-hoa",
-    tenNganh: "Thiết kế đồ họa",
-  },
-  {
-    maNganh: "quan-tri-khach-san",
-  tenNganh: "Quản trị khách sạn",
-},
-{
-  maNganh: "quan-tri-ban-hang",
-tenNganh: "Quản trị bán hàng",
-},
-{
-  maNganh: "phien-dich",
-tenNganh: "Phiên dịch Tiếng Anh thương mại",
-},
-{
-  maNganh: "quan-tri-doanh-nghiep",
-  tenNganh: "Quản trị doanh nghiệp",
-},
-{
-  maNganh: "UDPM",
-tenNganh: "CNTT - Ứng dụng phần mềm ",
-},
-{
-  maNganh: "quan-ly-cong-nghiep",
-tenNganh: "Quản lý công nghiệp",
-},
-{
-  maNganh: "Han",
-tenNganh: "Tiếng Hàn",
-},
-{
-  maNganh: "Nhat",
-tenNganh: "Tiếng Nhật",
-},
-{
-  maNganh: "CSSD",
-tenNganh: "Chăm sóc sắc đẹp",
-},
-{
-  maNganh: "Logistics",
-tenNganh: "Logistics",
-},
-{
-  maNganh: "tai-chinh",
-tenNganh: "Tài chính đầu tư",
-},
-{
-  maNganh: "Trung",
-tenNganh: "Tiếng Trung",
-},
-{
-  maNganh: "CNOT",
-tenNganh: "Công nghệ ô tô",
-},
-];
